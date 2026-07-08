@@ -164,8 +164,74 @@
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
   }
 
+  function initPrototypeStage() {
+    const stage = document.querySelector('[data-prototype-stage]');
+    if (!stage) return;
+
+    const dataEl = document.getElementById('itester-prototype-data');
+    if (!dataEl) return;
+
+    let screens;
+    try {
+      screens = JSON.parse(dataEl.textContent);
+    } catch (e) {
+      return;
+    }
+
+    let index = 0;
+    const device = stage.querySelector('[data-prototype-device]');
+    const img = stage.querySelector('[data-prototype-img]');
+    const label = stage.querySelector('[data-prototype-label]');
+    const counter = stage.querySelector('[data-prototype-counter]');
+    const prevBtn = stage.querySelector('[data-prototype-prev]');
+    const nextBtn = stage.querySelector('[data-prototype-next]');
+    const thumbs = stage.querySelectorAll('[data-prototype-nav] [data-index]');
+
+    const updateControls = () => {
+      if (prevBtn) prevBtn.disabled = index === 0;
+      if (nextBtn) nextBtn.disabled = index === screens.length - 1;
+      if (counter) counter.textContent = `${index + 1} / ${screens.length}`;
+      thumbs.forEach((thumb) => {
+        thumb.classList.toggle('is-active', Number(thumb.dataset.index) === index);
+      });
+    };
+
+    const showScreen = (nextIndex) => {
+      if (nextIndex < 0 || nextIndex >= screens.length || nextIndex === index) return;
+      index = nextIndex;
+      const screen = screens[index];
+
+      if (!device || !img || !label) return;
+
+      device.classList.add('is-transitioning');
+
+      window.setTimeout(() => {
+        img.src = screen.src;
+        img.alt = screen.alt;
+        label.textContent = screen.label;
+        updateControls();
+        device.classList.remove('is-transitioning');
+      }, 180);
+    };
+
+    prevBtn?.addEventListener('click', () => showScreen(index - 1));
+    nextBtn?.addEventListener('click', () => showScreen(index + 1));
+
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener('click', () => showScreen(Number(thumb.dataset.index)));
+    });
+
+    stage.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') showScreen(index - 1);
+      if (e.key === 'ArrowRight') showScreen(index + 1);
+    });
+
+    updateControls();
+  }
+
   initReveal();
   initReels();
+  initPrototypeStage();
   initClickableFrames('.flow-frame');
   initClickableFrames('.mockup-frame');
   initLightbox();
