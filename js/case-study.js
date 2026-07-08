@@ -107,35 +107,39 @@
     });
   }
 
-  function initReels() {
-    document.querySelectorAll('.ui-reel').forEach((reel) => {
-      const track = reel.querySelector('.ui-reel-track');
-      const prevBtn = reel.querySelector('.reel-edge--prev');
-      const nextBtn = reel.querySelector('.reel-edge--next');
-      const scrollAmount = () => Math.min(track.clientWidth * 0.75, 420);
+  function initGalleryReel(reel) {
+    const track = reel.querySelector('.ui-reel-track, .h-gallery__track');
+    if (!track) return;
 
-      initDragScroll(track);
+    const prevBtn = reel.querySelector('.reel-edge--prev');
+    const nextBtn = reel.querySelector('.reel-edge--next');
+    const scrollAmount = () => Math.min(track.clientWidth * 0.8, 520);
 
-      prevBtn?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
-      });
+    initDragScroll(track);
 
-      nextBtn?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        track.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
-      });
+    prevBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+    });
 
-      reel.querySelectorAll('.ui-frame').forEach((frame) => {
-        frame.addEventListener('click', () => {
-          if (typeof track.hasDragged === 'function' && track.hasDragged()) return;
-          const img = frame.querySelector('img');
-          if (!img) return;
-          const label = frame.querySelector('.frame-label');
-          openLightbox(img.currentSrc || img.src, img.alt, label ? label.textContent.trim() : '');
-        });
+    nextBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      track.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+    });
+
+    reel.querySelectorAll('.ui-frame, .h-gallery-card').forEach((frame) => {
+      frame.addEventListener('click', () => {
+        if (typeof track.hasDragged === 'function' && track.hasDragged()) return;
+        const img = frame.querySelector('img');
+        if (!img) return;
+        const label = frame.querySelector('.frame-label, figcaption');
+        openLightbox(img.currentSrc || img.src, img.alt, label ? label.textContent.trim() : '');
       });
     });
+  }
+
+  function initReels() {
+    document.querySelectorAll('.ui-reel, .h-gallery').forEach(initGalleryReel);
   }
 
   function initLightbox() {

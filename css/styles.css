@@ -1347,20 +1347,165 @@ button {
 
 .reel-hint--mobile { display: none; }
 .reel-hint--desktop { display: block; }
+.reel-hint--all { display: block; }
 
-/* Mobile: 2-column grid instead of horizontal scroll */
+/* ── Horizontal image galleries (low-fi, flows, mockups) ── */
+.h-gallery {
+  width: 100vw;
+  margin-left: calc(-1 * clamp(1.5rem, 6vw, 5rem));
+  padding: 0 clamp(1.5rem, 6vw, 5rem);
+  position: relative;
+  margin-top: 1.25rem;
+}
+
+.h-gallery__viewport {
+  position: relative;
+}
+
+.h-gallery__track {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 1rem 0 1.5rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) var(--border);
+  cursor: grab;
+}
+
+.h-gallery__track.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+  scroll-snap-type: none;
+}
+
+.h-gallery__track::-webkit-scrollbar {
+  height: 6px;
+}
+
+.h-gallery__track::-webkit-scrollbar-track {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.h-gallery__track::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+.h-gallery-card {
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+  margin: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-white);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.35s var(--transition), box-shadow 0.35s;
+}
+
+.h-gallery-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.h-gallery__track.is-dragging .h-gallery-card {
+  cursor: grabbing;
+  transform: none;
+}
+
+.h-gallery-card__media {
+  background: #f4f2ef;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.h-gallery-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  object-position: top center;
+}
+
+.h-gallery-card figcaption {
+  padding: 0.85rem 1rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-soft);
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+/* Card widths tuned for full clarity */
+.h-gallery--wireframe .h-gallery-card {
+  width: min(88vw, 540px);
+}
+
+.h-gallery--flow .h-gallery-card {
+  width: min(94vw, 1280px);
+}
+
+.h-gallery--device .h-gallery-card {
+  width: min(90vw, 720px);
+}
+
+.h-gallery--slide .h-gallery-card {
+  width: min(92vw, 960px);
+}
+
+.h-gallery--wide .h-gallery-card {
+  width: min(96vw, 1400px);
+}
+
+.case-study-main .ui-reel--horizontal .device-frame--macbook {
+  width: clamp(300px, 44vw, 500px);
+}
+
+.case-study-main .ui-reel--horizontal .device-frame--macbook .device-screen img {
+  object-fit: contain;
+  object-position: top center;
+  background: #111;
+}
+
+.lowfi-subsection .h-gallery,
+.cs-section--wide > .cs-section-inner > .h-gallery {
+  margin-top: 1.25rem;
+}
+
+/* Case study galleries stay horizontal on all breakpoints */
+.case-study-main .ui-reel--horizontal,
+.case-study-main .h-gallery {
+  width: 100vw;
+  margin-left: calc(-1 * clamp(1.5rem, 6vw, 5rem));
+}
+
+.case-study-main .h-gallery .reel-edge,
+.case-study-main .ui-reel--horizontal .reel-edge {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Mobile: 2-column grid only on main story page reels */
 @media (max-width: 768px) {
-  .ui-reel {
+  .ui-reel:not(.ui-reel--horizontal) {
     width: 100%;
     margin-left: 0;
     padding: 0;
   }
 
-  .reel-edge {
+  .ui-reel:not(.ui-reel--horizontal) .reel-edge {
     display: none;
   }
 
-  .ui-reel-track {
+  .ui-reel:not(.ui-reel--horizontal) .ui-reel-track {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
@@ -1370,18 +1515,35 @@ button {
     cursor: default;
   }
 
-  .ui-frame {
+  .ui-reel:not(.ui-reel--horizontal) .ui-frame {
     scroll-snap-align: unset;
     cursor: pointer;
   }
 
-  .ui-frame:hover {
+  .ui-reel:not(.ui-reel--horizontal) .ui-frame:hover {
     transform: translateY(-4px) scale(1.01);
   }
 
-  .device-frame--macbook,
-  .device-frame--iphone {
+  .ui-reel:not(.ui-reel--horizontal) .device-frame--macbook,
+  .ui-reel:not(.ui-reel--horizontal) .device-frame--iphone {
     width: 100%;
+  }
+
+  .case-study-main .h-gallery {
+    width: 100%;
+    margin-left: 0;
+    padding: 0;
+  }
+
+  .case-study-main .ui-reel--horizontal {
+    width: 100%;
+    margin-left: 0;
+    padding: 0;
+  }
+
+  .case-study-main .ui-reel--horizontal .device-frame--macbook,
+  .case-study-main .ui-reel--horizontal .device-frame--iphone {
+    width: min(85vw, 420px);
   }
 
   .device-frame--iphone {
@@ -1403,6 +1565,7 @@ button {
 
   .reel-hint--desktop { display: none; }
   .reel-hint--mobile { display: block; }
+  .reel-hint--all { display: block; }
 
   .metrics-row {
     flex-direction: column;
