@@ -2002,6 +2002,165 @@ button {
   }
 }
 
+/* ── Prototype & live links ── */
+.cs-prototype-bar {
+  padding: clamp(2rem, 5vh, 3rem) clamp(1.5rem, 6vw, 5rem);
+  background: linear-gradient(180deg, var(--bg-white) 0%, var(--bg-warm) 100%);
+  border-bottom: 1px solid var(--border);
+}
+
+.cs-prototype-bar .cs-section-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.cs-prototype-copy {
+  flex: 1 1 280px;
+}
+
+.cs-prototype-copy p {
+  font-size: 0.92rem;
+  color: var(--text-soft);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.cs-prototype-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn-figma,
+.btn-live,
+.btn-ppt {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.7rem 1.25rem;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: transform 0.25s, background 0.25s, box-shadow 0.25s;
+}
+
+.btn-figma {
+  background: var(--text);
+  color: var(--bg-cream);
+}
+
+.btn-figma:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(20, 20, 28, 0.15);
+}
+
+.btn-live {
+  background: var(--bg-white);
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+}
+
+.btn-live:hover {
+  background: var(--bg-warm);
+  transform: translateY(-2px);
+}
+
+.btn-ppt {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+}
+
+.btn-ppt:hover {
+  background: var(--bg-white);
+  transform: translateY(-2px);
+}
+
+/* ── Design system showcase ── */
+.cs-design-system-feature {
+  margin-top: 2rem;
+}
+
+.cs-design-system-feature img {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  cursor: zoom-in;
+}
+
+.cs-design-system-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .cs-design-system-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.cs-design-system-grid .mockup-frame img {
+  cursor: zoom-in;
+}
+
+/* ── Nested sub-case-study (RiVirtual Business Card) ── */
+.cs-sub-study {
+  background: var(--bg-warm);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.cs-sub-study-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  background: rgba(196, 165, 116, 0.15);
+  padding: 0.35rem 0.75rem;
+  border-radius: 100px;
+  margin-bottom: 1rem;
+}
+
+.cs-slide-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 640px) {
+  .cs-slide-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cs-slide-grid--three {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.cs-slide-grid .flow-frame img {
+  cursor: zoom-in;
+}
+
+.cs-download-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
 .cs-download-section {
   text-align: center;
   padding: clamp(3rem, 8vh, 5rem) clamp(1.5rem, 6vw, 5rem);
