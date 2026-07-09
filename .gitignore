@@ -8,3 +8,4 @@ desktop.ini
 # Temp / scratch
 assets/images/mockups/loop/temp/
 *.tmp
+case-studies/_*.txt
