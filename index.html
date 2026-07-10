@@ -18,6 +18,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preload" href="assets/images/profile/photo.png" as="image" fetchpriority="high">
 </head>
 <body>
   <div class="letterbox letterbox--top" aria-hidden="true"></div>
@@ -68,15 +69,12 @@
                 alt="Vinay Kottapeta"
                 class="profile-photo"
                 id="profile-photo"
+                width="280"
+                height="373"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
               >
-              <div class="placeholder-overlay">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-                  <circle cx="12" cy="8" r="4"/>
-                  <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-                </svg>
-                <span>Your Photo Here</span>
-                <small>Profile photo loading…</small>
-              </div>
             </div>
           </div>
         </div>
@@ -359,14 +357,15 @@
         <div class="epilogue-profile reveal">
           <div class="profile-frame profile-frame--small">
             <div class="profile-placeholder">
-              <img src="assets/images/profile/photo.png" alt="Vinay Kottapeta" class="profile-photo">
-              <div class="placeholder-overlay">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-                  <circle cx="12" cy="8" r="4"/>
-                  <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-                </svg>
-                <span>Your Photo</span>
-              </div>
+              <img
+                src="assets/images/profile/photo.png"
+                alt="Vinay Kottapeta"
+                class="profile-photo"
+                width="120"
+                height="120"
+                loading="lazy"
+                decoding="async"
+              >
             </div>
           </div>
         </div>

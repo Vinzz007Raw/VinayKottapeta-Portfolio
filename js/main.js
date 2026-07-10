@@ -60,17 +60,6 @@
     }
   };
 
-  function initProfilePhotos() {
-    document.querySelectorAll('.profile-photo').forEach((img) => {
-      const hidePlaceholder = () => {
-        img.classList.toggle('loaded', img.naturalWidth > 0);
-      };
-      img.addEventListener('load', hidePlaceholder);
-      img.addEventListener('error', () => img.classList.remove('loaded'));
-      if (img.complete) hidePlaceholder();
-    });
-  }
-
   function initNav() {
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 40);
@@ -244,7 +233,6 @@
     }, { passive: true });
   }
 
-  initProfilePhotos();
   initNav();
   initReveal();
   initMockupThumbs();
