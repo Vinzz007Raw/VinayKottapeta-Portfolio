@@ -530,6 +530,13 @@
       indexAnchor: 'chapter-goodreviews',
     },
     {
+      file: 'flixbuddy.html',
+      title: 'FlixBuddy',
+      tagline: 'Share the reel joy, together — social movie seat sharing for Hyderabad.',
+      cover: '../assets/images/covers/flixbuddy-cover.png',
+      indexAnchor: 'chapter-flixbuddy',
+    },
+    {
       file: 'brochures.html',
       title: 'Brand Collateral',
       tagline: 'Print stories you can hold — four campaigns, three brands.',
